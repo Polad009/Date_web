@@ -2,6 +2,8 @@ import { APP_CONFIG } from '../config';
 import { DatePlan } from '../types';
 
 export async function sendDateNotification(plan: DatePlan): Promise<{ success: boolean; message: string }> {
+  const phoneText = plan.phoneNumber ? `📱 *WhatsApp Nömrəsi:* ${plan.phoneNumber}` : `📱 *WhatsApp:* Qeyd etmədi`;
+
   const telegramMessage = `
 💖 *YENİ DATE CAVABI GƏLDİ!* 💖
 ━━━━━━━━━━━━━━━━━━
@@ -12,6 +14,8 @@ export async function sendDateNotification(plan: DatePlan): Promise<{ success: b
 🍽️ *Məkan / Yemək:* ${plan.foodPlace}
 🎡 *Plan:* ${plan.activity}
 🍰 *Desert:* ${plan.dessert || 'Seçilməyib'}
+
+${phoneText}
 
 💌 *Xüsusi Qeydi / Mahnı:*
 "${plan.specialNote || 'Xüsusi qeyd yazılmadı'}"
@@ -57,10 +61,4 @@ export async function sendDateNotification(plan: DatePlan): Promise<{ success: b
     success: true,
     message: sentSuccessfully ? 'Bildiriş göndərildi' : 'Yadda saxlanıldı',
   };
-}
-
-export function generateWhatsAppLink(plan: DatePlan): string {
-  const phone = APP_CONFIG.whatsapp.phoneNumber.replace(/[^0-9]/g, '');
-  const message = `Salam! ✨ Date planımızı təsdiqlədim 🥰\n\n📅 Tarix: ${plan.selectedDate}\n⏰ Saat: ${plan.selectedTime}\n🍽️ Məkan: ${plan.foodPlace}\n🎡 Plan: ${plan.activity}\n\nGörüşmək üçün səbirsizlənirəm! 💖`;
-  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }
