@@ -5,7 +5,6 @@ export interface DatePlan {
   foodPlace: string;
   activity: string;
   dessert?: string;
-  phoneNumber?: string;
   specialNote: string;
   submittedAt?: string;
 }

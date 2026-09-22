@@ -2,8 +2,6 @@ import { APP_CONFIG } from '../config';
 import { DatePlan } from '../types';
 
 export async function sendDateNotification(plan: DatePlan): Promise<{ success: boolean; message: string }> {
-  const phoneText = plan.phoneNumber ? `📱 *WhatsApp Nömrəsi:* ${plan.phoneNumber}` : `📱 *WhatsApp:* Qeyd etmədi`;
-
   const telegramMessage = `
 💖 *YENİ DATE CAVABI GƏLDİ!* 💖
 ━━━━━━━━━━━━━━━━━━
@@ -14,8 +12,6 @@ export async function sendDateNotification(plan: DatePlan): Promise<{ success: b
 🍽️ *Məkan / Yemək:* ${plan.foodPlace}
 🎡 *Plan:* ${plan.activity}
 🍰 *Desert:* ${plan.dessert || 'Seçilməyib'}
-
-${phoneText}
 
 💌 *Xüsusi Qeydi / Mahnı:*
 "${plan.specialNote || 'Xüsusi qeyd yazılmadı'}"

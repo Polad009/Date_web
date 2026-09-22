@@ -100,7 +100,7 @@ export function App() {
               key="step4"
               plan={datePlan}
               isSubmitting={isSubmitting}
-              onUpdateNote={(data) => setDatePlan((prev) => ({ ...prev, ...data }))}
+              onUpdateNote={(note) => setDatePlan((prev) => ({ ...prev, specialNote: note }))}
               onSubmit={handleFinalSubmit}
               onBack={() => setStep(3)}
             />

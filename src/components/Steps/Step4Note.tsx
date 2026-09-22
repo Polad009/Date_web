@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Heart, MessageSquare, Phone, ArrowLeft, Loader2, Sparkles } from 'lucide-react';
+import { Send, Heart, MessageSquare, ArrowLeft, Loader2, Sparkles } from 'lucide-react';
 import { DatePlan } from '../../types';
 
 interface Step4NoteProps {
   plan: DatePlan;
-  onUpdateNote: (data: { specialNote: string; phoneNumber?: string }) => void;
+  onUpdateNote: (note: string) => void;
   onSubmit: () => void;
   onBack: () => void;
   isSubmitting: boolean;
@@ -19,14 +19,10 @@ export const Step4Note: React.FC<Step4NoteProps> = ({
   isSubmitting,
 }) => {
   const [note, setNote] = useState(plan.specialNote || '');
-  const [phone, setPhone] = useState(plan.phoneNumber || '');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onUpdateNote({
-      specialNote: note.trim(),
-      phoneNumber: phone.trim(),
-    });
+    onUpdateNote(note.trim());
     onSubmit();
   };
 
@@ -75,24 +71,6 @@ export const Step4Note: React.FC<Step4NoteProps> = ({
       </div>
 
       <form onSubmit={handleSubmit}>
-        {/* Optional WhatsApp Phone Number input */}
-        <div className="mb-4">
-          <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1">
-            <Phone className="w-3.5 h-3.5 text-emerald-500" />
-            <span>WhatsApp Nömrən <span className="text-[10px] text-slate-400 font-normal lowercase">(könüllü)</span>:</span>
-          </label>
-          <input
-            type="tel"
-            placeholder="+994 50 123 45 67"
-            value={phone}
-            onChange={(e) => {
-              setPhone(e.target.value);
-              onUpdateNote({ specialNote: note, phoneNumber: e.target.value });
-            }}
-            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-400"
-          />
-        </div>
-
         {/* Message / Song input */}
         <div className="mb-6">
           <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1">
@@ -105,7 +83,7 @@ export const Step4Note: React.FC<Step4NoteProps> = ({
             value={note}
             onChange={(e) => {
               setNote(e.target.value);
-              onUpdateNote({ specialNote: e.target.value, phoneNumber: phone });
+              onUpdateNote(e.target.value);
             }}
             className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-400 resize-none"
           />
