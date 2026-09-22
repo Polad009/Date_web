@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Utensils, Sparkles, Cake, Check, ArrowRight, ArrowLeft } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Utensils, Sparkles, Cake, Check, Edit3, ArrowRight, ArrowLeft } from 'lucide-react';
 import { RESTAURANT_OPTIONS, ACTIVITY_OPTIONS, DESSERT_QUICK_OPTIONS } from '../../types';
 
 interface Step3FoodAndActivityProps {
@@ -21,26 +21,68 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
   onBack,
 }) => {
   const [food, setFood] = useState(selectedFood || RESTAURANT_OPTIONS[0].title);
+  const [customFood, setCustomFood] = useState('');
+
   const [activity, setActivity] = useState(selectedActivity || ACTIVITY_OPTIONS[0].title);
+  const [customActivity, setCustomActivity] = useState('');
+
   const [dessert, setDessert] = useState(selectedDessert || DESSERT_QUICK_OPTIONS[0].title);
+  const [customDessert, setCustomDessert] = useState('');
+
+  const getEffectiveFood = (f = food, cf = customFood) => {
+    if (f === 'Digər ✨') {
+      return cf.trim() ? `Digər (${cf.trim()})` : 'Digər';
+    }
+    return f;
+  };
+
+  const getEffectiveActivity = (a = activity, ca = customActivity) => {
+    if (a === 'Digər ✨') {
+      return ca.trim() ? `Digər (${ca.trim()})` : 'Digər';
+    }
+    return a;
+  };
+
+  const getEffectiveDessert = (d = dessert, cd = customDessert) => {
+    if (d === 'Digər ✨') {
+      return cd.trim() ? `Digər (${cd.trim()})` : 'Digər';
+    }
+    return d;
+  };
 
   const handleFoodSelect = (title: string) => {
     setFood(title);
-    onUpdate({ foodPlace: title, activity, dessert });
+    onUpdate({
+      foodPlace: getEffectiveFood(title, customFood),
+      activity: getEffectiveActivity(),
+      dessert: getEffectiveDessert(),
+    });
   };
 
   const handleActivitySelect = (title: string) => {
     setActivity(title);
-    onUpdate({ foodPlace: food, activity: title, dessert });
+    onUpdate({
+      foodPlace: getEffectiveFood(),
+      activity: getEffectiveActivity(title, customActivity),
+      dessert: getEffectiveDessert(),
+    });
   };
 
   const handleDessertSelect = (title: string) => {
     setDessert(title);
-    onUpdate({ foodPlace: food, activity, dessert: title });
+    onUpdate({
+      foodPlace: getEffectiveFood(),
+      activity: getEffectiveActivity(),
+      dessert: getEffectiveDessert(title, customDessert),
+    });
   };
 
   const handleNextClick = () => {
-    onUpdate({ foodPlace: food, activity, dessert });
+    onUpdate({
+      foodPlace: getEffectiveFood(),
+      activity: getEffectiveActivity(),
+      dessert: getEffectiveDessert(),
+    });
     onNext();
   };
 
@@ -66,7 +108,7 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
 
       {/* 1. Restaurants */}
       <div className="mb-5">
-        <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+        <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
           <Utensils className="w-3.5 h-3.5 text-rose-500" />
           <span>Hara gedək? / Yemək seçimi:</span>
         </label>
@@ -88,9 +130,6 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                   src={item.image}
                   alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80';
-                  }}
                 />
                 <div className={`absolute inset-0 transition-opacity ${
                   isSelected ? 'bg-gradient-to-t from-rose-950/90 via-rose-900/40 to-transparent' : 'bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent'
@@ -109,6 +148,36 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
             );
           })}
         </div>
+
+        {/* Custom food input if 'Digər' is chosen */}
+        <AnimatePresence>
+          {food === 'Digər ✨' && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mt-2.5"
+            >
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="İstədiyin məkanı və ya yeməyi yaz (könüllü)..."
+                  value={customFood}
+                  onChange={(e) => {
+                    setCustomFood(e.target.value);
+                    onUpdate({
+                      foodPlace: getEffectiveFood(food, e.target.value),
+                      activity: getEffectiveActivity(),
+                      dessert: getEffectiveDessert(),
+                    });
+                  }}
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-rose-300 bg-rose-50/40 text-slate-800 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 pl-9"
+                />
+                <Edit3 className="w-4 h-4 text-rose-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* 2. Activities */}
@@ -117,7 +186,7 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
           <Sparkles className="w-3.5 h-3.5 text-rose-500" />
           <span>Görüşdə nə edək?</span>
         </label>
-        <div className="grid grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
           {ACTIVITY_OPTIONS.map((item) => {
             const isSelected = activity === item.title;
             return (
@@ -135,9 +204,6 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                   src={item.image}
                   alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/images/bowling.jpg';
-                  }}
                 />
                 <div className={`absolute inset-0 transition-opacity ${
                   isSelected ? 'bg-gradient-to-t from-rose-950/90 via-rose-900/40 to-transparent' : 'bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent'
@@ -156,6 +222,36 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
             );
           })}
         </div>
+
+        {/* Custom activity input if 'Digər' is chosen */}
+        <AnimatePresence>
+          {activity === 'Digər ✨' && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mt-2.5"
+            >
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Ağlındakı planı və ya aktivliyi yaz (könüllü)..."
+                  value={customActivity}
+                  onChange={(e) => {
+                    setCustomActivity(e.target.value);
+                    onUpdate({
+                      foodPlace: getEffectiveFood(),
+                      activity: getEffectiveActivity(activity, e.target.value),
+                      dessert: getEffectiveDessert(),
+                    });
+                  }}
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-rose-300 bg-rose-50/40 text-slate-800 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 pl-9"
+                />
+                <Edit3 className="w-4 h-4 text-rose-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* 3. Desserts */}
@@ -164,7 +260,7 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
           <Cake className="w-3.5 h-3.5 text-rose-500" />
           <span>Şirniyyat / Desert:</span>
         </label>
-        <div className="grid grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
           {DESSERT_QUICK_OPTIONS.map((item) => {
             const isSelected = dessert === item.title;
             return (
@@ -182,9 +278,6 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                   src={item.image}
                   alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=400&q=80';
-                  }}
                 />
                 <div className={`absolute inset-0 transition-opacity ${
                   isSelected ? 'bg-gradient-to-t from-rose-950/90 via-rose-900/40 to-transparent' : 'bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent'
@@ -203,6 +296,36 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
             );
           })}
         </div>
+
+        {/* Custom dessert input if 'Digər' is chosen */}
+        <AnimatePresence>
+          {dessert === 'Digər ✨' && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mt-2.5"
+            >
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Sevdiyin şirniyyatı və ya deserti yaz (könüllü)..."
+                  value={customDessert}
+                  onChange={(e) => {
+                    setCustomDessert(e.target.value);
+                    onUpdate({
+                      foodPlace: getEffectiveFood(),
+                      activity: getEffectiveActivity(),
+                      dessert: getEffectiveDessert(dessert, e.target.value),
+                    });
+                  }}
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-rose-300 bg-rose-50/40 text-slate-800 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 pl-9"
+                />
+                <Edit3 className="w-4 h-4 text-rose-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Navigation Buttons */}

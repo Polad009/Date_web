@@ -41,6 +41,11 @@ export const RESTAURANT_OPTIONS: CardOptionItem[] = [
     title: 'Suşi',
     image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=400&q=80',
   },
+  {
+    id: 'other_food',
+    title: 'Digər ✨',
+    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80',
+  },
 ];
 
 export const ACTIVITY_OPTIONS: CardOptionItem[] = [
@@ -64,6 +69,11 @@ export const ACTIVITY_OPTIONS: CardOptionItem[] = [
     title: 'Sakit Qəhvə Söhbəti',
     image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=400&q=80',
   },
+  {
+    id: 'other_activity',
+    title: 'Digər ✨',
+    image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=400&q=80',
+  },
 ];
 
 export const DESSERT_QUICK_OPTIONS: CardOptionItem[] = [
@@ -86,5 +96,10 @@ export const DESSERT_QUICK_OPTIONS: CardOptionItem[] = [
     id: 'none',
     title: 'Yalnız yemək kifayətdir 😋',
     image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 'other_dessert',
+    title: 'Digər ✨',
+    image: 'https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=400&q=80',
   },
 ];
