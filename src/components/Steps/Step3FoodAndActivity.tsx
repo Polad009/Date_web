@@ -136,7 +136,7 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                   alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = 'https://images.pexels.com/photos/4058530/pexels-photo-4058530.jpeg?auto=compress&cs=tinysrgb&w=400';
+                    (e.target as HTMLImageElement).src = '/images/bowling.jpg';
                   }}
                 />
                 <div className={`absolute inset-0 transition-opacity ${
