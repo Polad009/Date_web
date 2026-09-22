@@ -64,9 +64,9 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
         </p>
       </div>
 
-      {/* 1. Only 5 Restaurants with Full-Cover Images & Badges */}
+      {/* 1. Restaurants with Full-Cover Images */}
       <div className="mb-5">
-        <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+        <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <Utensils className="w-3.5 h-3.5 text-rose-500" />
           <span>Hara gedək? / Yemək seçimi:</span>
         </label>
@@ -78,33 +78,28 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                 key={item.id}
                 type="button"
                 onClick={() => handleFoodSelect(item.title)}
-                className={`relative h-24 sm:h-28 rounded-2xl overflow-hidden border-2 transition-all duration-300 text-left flex flex-col justify-end p-2.5 group cursor-pointer ${
+                className={`relative h-20 sm:h-24 rounded-2xl overflow-hidden border-2 transition-all duration-300 text-left flex flex-col justify-end p-2.5 group cursor-pointer ${
                   isSelected
                     ? 'border-rose-500 ring-4 ring-rose-300/60 shadow-lg scale-102'
                     : 'border-slate-200 hover:border-rose-300 opacity-90 hover:opacity-100'
                 }`}
               >
-                {/* Full-Cover Background Image */}
                 <img
                   src={item.image}
                   alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
                 />
-
-                {/* Dark Gradient Overlay for readability */}
                 <div className={`absolute inset-0 transition-opacity ${
                   isSelected ? 'bg-gradient-to-t from-rose-950/90 via-rose-900/40 to-transparent' : 'bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent'
                 }`} />
 
-                {/* Selection Checkmark */}
                 {isSelected && (
-                  <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-md">
-                    <Check className="w-3.5 h-3.5" />
+                  <div className="absolute top-2 right-2 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-md">
+                    <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                   </div>
                 )}
 
-                {/* Title */}
-                <span className="relative z-10 text-white font-bold text-sm sm:text-base drop-shadow-md">
+                <span className="relative z-10 text-white font-bold text-xs sm:text-sm drop-shadow-md">
                   {item.title}
                 </span>
               </button>
@@ -113,13 +108,13 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
         </div>
       </div>
 
-      {/* 2. Activity Choices */}
+      {/* 2. Activities with Full-Cover Images */}
       <div className="mb-5">
         <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <Sparkles className="w-3.5 h-3.5 text-rose-500" />
           <span>Görüşdə nə edək?</span>
         </label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2.5">
           {ACTIVITY_OPTIONS.map((item) => {
             const isSelected = activity === item.title;
             return (
@@ -127,29 +122,43 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                 key={item.id}
                 type="button"
                 onClick={() => handleActivitySelect(item.title)}
-                className={`p-2.5 rounded-xl border text-left transition flex items-center gap-2 cursor-pointer ${
+                className={`relative h-20 sm:h-24 rounded-2xl overflow-hidden border-2 transition-all duration-300 text-left flex flex-col justify-end p-2.5 group cursor-pointer ${
                   isSelected
-                    ? 'border-rose-400 bg-rose-500 text-white shadow-sm font-semibold'
-                    : 'border-slate-200 bg-white/80 text-slate-700 hover:border-rose-200'
+                    ? 'border-rose-500 ring-4 ring-rose-300/60 shadow-lg scale-102'
+                    : 'border-slate-200 hover:border-rose-300 opacity-90 hover:opacity-100'
                 }`}
               >
-                <span className="text-lg">{item.emoji}</span>
-                <div className="truncate">
-                  <div className="text-xs font-medium">{item.title}</div>
-                </div>
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                />
+                <div className={`absolute inset-0 transition-opacity ${
+                  isSelected ? 'bg-gradient-to-t from-rose-950/90 via-rose-900/40 to-transparent' : 'bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent'
+                }`} />
+
+                {isSelected && (
+                  <div className="absolute top-2 right-2 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-md">
+                    <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                  </div>
+                )}
+
+                <span className="relative z-10 text-white font-bold text-xs sm:text-sm drop-shadow-md">
+                  {item.title}
+                </span>
               </button>
             );
           })}
         </div>
       </div>
 
-      {/* 3. Simple Dessert Choice */}
+      {/* 3. Desserts with Full-Cover Images */}
       <div className="mb-6">
         <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <Cake className="w-3.5 h-3.5 text-rose-500" />
           <span>Şirniyyat / Desert:</span>
         </label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2.5">
           {DESSERT_QUICK_OPTIONS.map((item) => {
             const isSelected = dessert === item.title;
             return (
@@ -157,13 +166,30 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                 key={item.id}
                 type="button"
                 onClick={() => handleDessertSelect(item.title)}
-                className={`p-2.5 rounded-xl border text-center transition text-xs font-medium cursor-pointer ${
+                className={`relative h-20 sm:h-24 rounded-2xl overflow-hidden border-2 transition-all duration-300 text-left flex flex-col justify-end p-2.5 group cursor-pointer ${
                   isSelected
-                    ? 'border-rose-400 bg-rose-500 text-white shadow-sm font-semibold'
-                    : 'border-slate-200 bg-white/80 text-slate-700 hover:border-rose-200'
+                    ? 'border-rose-500 ring-4 ring-rose-300/60 shadow-lg scale-102'
+                    : 'border-slate-200 hover:border-rose-300 opacity-90 hover:opacity-100'
                 }`}
               >
-                {item.title}
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                />
+                <div className={`absolute inset-0 transition-opacity ${
+                  isSelected ? 'bg-gradient-to-t from-rose-950/90 via-rose-900/40 to-transparent' : 'bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent'
+                }`} />
+
+                {isSelected && (
+                  <div className="absolute top-2 right-2 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-md">
+                    <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                  </div>
+                )}
+
+                <span className="relative z-10 text-white font-bold text-xs sm:text-sm drop-shadow-md">
+                  {item.title}
+                </span>
               </button>
             );
           })}

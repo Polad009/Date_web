@@ -9,13 +9,13 @@ export interface DatePlan {
   submittedAt?: string;
 }
 
-export interface RestaurantItem {
+export interface CardOptionItem {
   id: string;
   title: string;
   image: string;
 }
 
-export const RESTAURANT_OPTIONS: RestaurantItem[] = [
+export const RESTAURANT_OPTIONS: CardOptionItem[] = [
   {
     id: 'kfc',
     title: 'KFC',
@@ -43,16 +43,48 @@ export const RESTAURANT_OPTIONS: RestaurantItem[] = [
   },
 ];
 
-export const ACTIVITY_OPTIONS = [
-  { id: 'walk', title: 'Dənizkənarı Gəzinti', emoji: '🌊', desc: 'Təmiz hava və xoş söhbət' },
-  { id: 'bowling', title: 'Bowling / Əyləncə', emoji: '🎳', desc: 'Gülüş və şən rəqabət' },
-  { id: 'cinema', title: 'Kino / Film', emoji: '🎬', desc: 'Maraqlı bir film və popkorn' },
-  { id: 'coffee_talk', title: 'Sakit Qəhvə Söhbəti', emoji: '☕', desc: 'Bir-birimizi tanımaq üçün' },
+export const ACTIVITY_OPTIONS: CardOptionItem[] = [
+  {
+    id: 'walk',
+    title: 'Dənizkənarı Gəzinti',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 'bowling',
+    title: 'Bowling / Əyləncə',
+    image: 'https://images.unsplash.com/photo-1545232979-fbf675949514?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 'cinema',
+    title: 'Kino / Film',
+    image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 'coffee_talk',
+    title: 'Sakit Qəhvə Söhbəti',
+    image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=400&q=80',
+  },
 ];
 
-export const DESSERT_QUICK_OPTIONS = [
-  { id: 'icecream', title: 'Dondurma 🍦' },
-  { id: 'cheesecake', title: 'Cheesecake 🍰' },
-  { id: 'waffle', title: 'Waffle 🧇' },
-  { id: 'none', title: 'Yalnız yemək kifayətdir 😋' },
+export const DESSERT_QUICK_OPTIONS: CardOptionItem[] = [
+  {
+    id: 'icecream',
+    title: 'Dondurma 🍦',
+    image: 'https://images.unsplash.com/photo-1560008581-09826d1de69e?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 'cheesecake',
+    title: 'Cheesecake 🍰',
+    image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 'waffle',
+    title: 'Waffle 🧇',
+    image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 'none',
+    title: 'Yalnız yemək kifayətdir 😋',
+    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&q=80',
+  },
 ];
