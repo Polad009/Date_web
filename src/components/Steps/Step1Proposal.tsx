@@ -128,7 +128,7 @@ export const Step1Proposal: React.FC<Step1ProposalProps> = ({ onAccept }) => {
       </h1>
 
       <p className="font-romantic text-2xl sm:text-3xl text-rose-600 font-semibold my-2 px-1">
-        Mənimlə bir qəhvə içməyə və ya date-ə necə baxırsan? ☕🌹
+        Birlikdə bir qəhvə içib söhbət etməyə necə baxırsan? ☕✨
       </p>
 
       <p className="text-slate-600 text-xs sm:text-sm max-w-xs sm:max-w-sm mx-auto mb-6 sm:mb-8 font-normal leading-relaxed px-2">

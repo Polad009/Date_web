@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Utensils, Sparkles, Cake, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Utensils, Sparkles, Cake, Gift, ArrowRight, ArrowLeft } from 'lucide-react';
 import { RESTAURANT_OPTIONS, ACTIVITY_OPTIONS, DESSERT_QUICK_OPTIONS } from '../../types';
 
 interface Step3FoodAndActivityProps {
@@ -64,13 +64,13 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
         </p>
       </div>
 
-      {/* 1. Restaurant / Food Choices */}
+      {/* 1. Restaurant / Food Choices with Official Brand Logos */}
       <div className="mb-5">
         <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <Utensils className="w-3.5 h-3.5 text-rose-500" />
           <span>Hara gedək? / Yemək seçimi:</span>
         </label>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {RESTAURANT_OPTIONS.map((item) => {
             const isSelected = food === item.title;
             return (
@@ -78,21 +78,36 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                 key={item.id}
                 type="button"
                 onClick={() => handleFoodSelect(item.title)}
-                className={`p-2.5 rounded-xl border text-left transition flex items-center gap-2 cursor-pointer ${
+                className={`p-2.5 rounded-2xl border text-center transition flex flex-col items-center justify-center gap-1.5 cursor-pointer relative ${
                   isSelected
-                    ? 'border-rose-400 bg-rose-500 text-white shadow-sm font-semibold'
-                    : 'border-slate-200 bg-white/80 text-slate-700 hover:border-rose-200'
+                    ? 'border-rose-500 bg-rose-50/90 ring-2 ring-rose-400 shadow-md scale-102'
+                    : 'border-slate-200 bg-white/90 text-slate-700 hover:border-rose-300 hover:bg-rose-50/40'
                 }`}
               >
-                <span className="text-lg">{item.emoji}</span>
-                <span className="text-xs truncate">{item.title}</span>
+                {/* Brand Logo or Icon */}
+                <div className="w-10 h-10 rounded-xl bg-white shadow-xs border border-slate-100 p-1 flex items-center justify-center overflow-hidden shrink-0">
+                  {item.logo ? (
+                    <img
+                      src={item.logo}
+                      alt={item.title}
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    <Gift className="w-5 h-5 text-rose-500" />
+                  )}
+                </div>
+
+                {/* Title */}
+                <span className={`text-[11px] font-semibold leading-tight ${isSelected ? 'text-rose-700' : 'text-slate-800'}`}>
+                  {item.title}
+                </span>
               </button>
             );
           })}
         </div>
       </div>
 
-      {/* 2. Activity Choices (Bowling, Gezinti, etc.) */}
+      {/* 2. Activity Choices */}
       <div className="mb-5">
         <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <Sparkles className="w-3.5 h-3.5 text-rose-500" />

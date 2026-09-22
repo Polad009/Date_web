@@ -62,7 +62,7 @@ export const Step0Welcome: React.FC<Step0WelcomeProps> = ({ onOpen }) => {
 
       {/* Mystery Title */}
       <h1 className="font-serif text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight leading-snug my-3">
-        Sənin üçün bir mesaj var ✨
+        Sənə mesajım var ✨
       </h1>
 
       <p className="text-slate-600 text-xs sm:text-sm max-w-xs mx-auto mb-6 sm:mb-8 font-normal leading-relaxed">
