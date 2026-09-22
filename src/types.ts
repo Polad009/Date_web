@@ -52,7 +52,7 @@ export const ACTIVITY_OPTIONS: CardOptionItem[] = [
   {
     id: 'bowling',
     title: 'Bowling / Əyləncə',
-    image: 'https://images.unsplash.com/photo-1538388184544-d830b561e1fb?auto=format&fit=crop&w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=400&q=80',
   },
   {
     id: 'cinema',

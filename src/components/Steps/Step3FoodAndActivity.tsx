@@ -64,7 +64,7 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
         </p>
       </div>
 
-      {/* 1. Restaurants with Full-Cover Images */}
+      {/* 1. Restaurants */}
       <div className="mb-5">
         <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <Utensils className="w-3.5 h-3.5 text-rose-500" />
@@ -78,7 +78,7 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                 key={item.id}
                 type="button"
                 onClick={() => handleFoodSelect(item.title)}
-                className={`relative h-20 sm:h-24 rounded-2xl overflow-hidden border-2 transition-all duration-300 text-left flex flex-col justify-end p-2.5 group cursor-pointer ${
+                className={`relative h-20 sm:h-24 rounded-2xl overflow-hidden border-2 transition-all duration-300 text-left flex flex-col justify-end p-2.5 group cursor-pointer bg-slate-800 ${
                   isSelected
                     ? 'border-rose-500 ring-4 ring-rose-300/60 shadow-lg scale-102'
                     : 'border-slate-200 hover:border-rose-300 opacity-90 hover:opacity-100'
@@ -88,6 +88,9 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                   src={item.image}
                   alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80';
+                  }}
                 />
                 <div className={`absolute inset-0 transition-opacity ${
                   isSelected ? 'bg-gradient-to-t from-rose-950/90 via-rose-900/40 to-transparent' : 'bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent'
@@ -108,7 +111,7 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
         </div>
       </div>
 
-      {/* 2. Activities with Full-Cover Images */}
+      {/* 2. Activities */}
       <div className="mb-5">
         <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <Sparkles className="w-3.5 h-3.5 text-rose-500" />
@@ -122,7 +125,7 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                 key={item.id}
                 type="button"
                 onClick={() => handleActivitySelect(item.title)}
-                className={`relative h-20 sm:h-24 rounded-2xl overflow-hidden border-2 transition-all duration-300 text-left flex flex-col justify-end p-2.5 group cursor-pointer ${
+                className={`relative h-20 sm:h-24 rounded-2xl overflow-hidden border-2 transition-all duration-300 text-left flex flex-col justify-end p-2.5 group cursor-pointer bg-slate-800 ${
                   isSelected
                     ? 'border-rose-500 ring-4 ring-rose-300/60 shadow-lg scale-102'
                     : 'border-slate-200 hover:border-rose-300 opacity-90 hover:opacity-100'
@@ -132,6 +135,9 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                   src={item.image}
                   alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=400&q=80';
+                  }}
                 />
                 <div className={`absolute inset-0 transition-opacity ${
                   isSelected ? 'bg-gradient-to-t from-rose-950/90 via-rose-900/40 to-transparent' : 'bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent'
@@ -152,7 +158,7 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
         </div>
       </div>
 
-      {/* 3. Desserts with Full-Cover Images */}
+      {/* 3. Desserts */}
       <div className="mb-6">
         <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <Cake className="w-3.5 h-3.5 text-rose-500" />
@@ -166,7 +172,7 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                 key={item.id}
                 type="button"
                 onClick={() => handleDessertSelect(item.title)}
-                className={`relative h-20 sm:h-24 rounded-2xl overflow-hidden border-2 transition-all duration-300 text-left flex flex-col justify-end p-2.5 group cursor-pointer ${
+                className={`relative h-20 sm:h-24 rounded-2xl overflow-hidden border-2 transition-all duration-300 text-left flex flex-col justify-end p-2.5 group cursor-pointer bg-slate-800 ${
                   isSelected
                     ? 'border-rose-500 ring-4 ring-rose-300/60 shadow-lg scale-102'
                     : 'border-slate-200 hover:border-rose-300 opacity-90 hover:opacity-100'
@@ -176,6 +182,9 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                   src={item.image}
                   alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=400&q=80';
+                  }}
                 />
                 <div className={`absolute inset-0 transition-opacity ${
                   isSelected ? 'bg-gradient-to-t from-rose-950/90 via-rose-900/40 to-transparent' : 'bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent'
