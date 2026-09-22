@@ -1,10 +1,10 @@
 export interface DatePlan {
   agreed: boolean;
-  selectedDate: string; // e.g. "2026-09-25"
-  selectedTime: string; // e.g. "19:00"
-  foodPlace: string;    // e.g. "KFC", "McDonald's", "Popeyes", etc.
-  activity: string;     // e.g. "Sakit Gəzinti", "Bowling", "Kino", "Qəhvə & Söhbət"
-  dessert?: string;     // e.g. "Dondurma", "Cheesecake", "Waffle", "İstəmirəm"
+  selectedDate: string;
+  selectedTime: string;
+  foodPlace: string;
+  activity: string;
+  dessert?: string;
   specialNote: string;
   submittedAt?: string;
 }
@@ -12,58 +12,34 @@ export interface DatePlan {
 export interface RestaurantItem {
   id: string;
   title: string;
-  logo: string;
-  bgColor?: string;
+  image: string;
 }
 
 export const RESTAURANT_OPTIONS: RestaurantItem[] = [
   {
     id: 'kfc',
     title: 'KFC',
-    logo: 'https://upload.wikimedia.org/wikipedia/sco/b/bf/KFC_logo.svg',
-    bgColor: '#ffffff',
+    image: 'https://images.unsplash.com/photo-1513639776629-7b61b0ac49cb?auto=format&fit=crop&w=400&q=80',
   },
   {
     id: 'mcdonalds',
     title: "McDonald's",
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/3/36/McDonald%27s_Golden_Arches.svg',
-    bgColor: '#ffffff',
+    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=400&q=80',
   },
   {
     id: 'popeyes',
     title: 'Popeyes',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/3/36/Popeyes_Louisiana_Kitchen_logo.svg',
-    bgColor: '#ffffff',
-  },
-  {
-    id: 'paul',
-    title: 'Paul / Cozy Kafe',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Paul_Bakery_Logo.svg',
-    bgColor: '#000000',
-  },
-  {
-    id: 'mado',
-    title: 'MADO',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Mado_logo.svg',
-    bgColor: '#ffffff',
+    image: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=400&q=80',
   },
   {
     id: 'pizza',
-    title: 'Pizza / İtalyan',
-    logo: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=120&q=80',
-    bgColor: '#fff1f2',
+    title: 'Pizza',
+    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80',
   },
   {
     id: 'sushi',
-    title: 'Suşi Restoranı',
-    logo: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=120&q=80',
-    bgColor: '#fff1f2',
-  },
-  {
-    id: 'surprise',
-    title: 'Sürpriz Məkan ✨',
-    logo: '',
-    bgColor: '#fff1f2',
+    title: 'Suşi',
+    image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=400&q=80',
   },
 ];
 

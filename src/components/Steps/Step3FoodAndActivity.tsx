@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Utensils, Sparkles, Cake, Gift, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Utensils, Sparkles, Cake, Check, ArrowRight, ArrowLeft } from 'lucide-react';
 import { RESTAURANT_OPTIONS, ACTIVITY_OPTIONS, DESSERT_QUICK_OPTIONS } from '../../types';
 
 interface Step3FoodAndActivityProps {
@@ -64,13 +64,13 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
         </p>
       </div>
 
-      {/* 1. Restaurant / Food Choices with Official Brand Logos */}
+      {/* 1. Only 5 Restaurants with Full-Cover Images & Badges */}
       <div className="mb-5">
-        <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+        <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
           <Utensils className="w-3.5 h-3.5 text-rose-500" />
           <span>Hara gedək? / Yemək seçimi:</span>
         </label>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
           {RESTAURANT_OPTIONS.map((item) => {
             const isSelected = food === item.title;
             return (
@@ -78,27 +78,33 @@ export const Step3FoodAndActivity: React.FC<Step3FoodAndActivityProps> = ({
                 key={item.id}
                 type="button"
                 onClick={() => handleFoodSelect(item.title)}
-                className={`p-2.5 rounded-2xl border text-center transition flex flex-col items-center justify-center gap-1.5 cursor-pointer relative ${
+                className={`relative h-24 sm:h-28 rounded-2xl overflow-hidden border-2 transition-all duration-300 text-left flex flex-col justify-end p-2.5 group cursor-pointer ${
                   isSelected
-                    ? 'border-rose-500 bg-rose-50/90 ring-2 ring-rose-400 shadow-md scale-102'
-                    : 'border-slate-200 bg-white/90 text-slate-700 hover:border-rose-300 hover:bg-rose-50/40'
+                    ? 'border-rose-500 ring-4 ring-rose-300/60 shadow-lg scale-102'
+                    : 'border-slate-200 hover:border-rose-300 opacity-90 hover:opacity-100'
                 }`}
               >
-                {/* Brand Logo or Icon */}
-                <div className="w-10 h-10 rounded-xl bg-white shadow-xs border border-slate-100 p-1 flex items-center justify-center overflow-hidden shrink-0">
-                  {item.logo ? (
-                    <img
-                      src={item.logo}
-                      alt={item.title}
-                      className="w-full h-full object-contain"
-                    />
-                  ) : (
-                    <Gift className="w-5 h-5 text-rose-500" />
-                  )}
-                </div>
+                {/* Full-Cover Background Image */}
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                />
+
+                {/* Dark Gradient Overlay for readability */}
+                <div className={`absolute inset-0 transition-opacity ${
+                  isSelected ? 'bg-gradient-to-t from-rose-950/90 via-rose-900/40 to-transparent' : 'bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent'
+                }`} />
+
+                {/* Selection Checkmark */}
+                {isSelected && (
+                  <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-md">
+                    <Check className="w-3.5 h-3.5" />
+                  </div>
+                )}
 
                 {/* Title */}
-                <span className={`text-[11px] font-semibold leading-tight ${isSelected ? 'text-rose-700' : 'text-slate-800'}`}>
+                <span className="relative z-10 text-white font-bold text-sm sm:text-base drop-shadow-md">
                   {item.title}
                 </span>
               </button>
