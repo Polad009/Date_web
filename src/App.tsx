@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import { FloatingHearts } from './components/FloatingHearts';
 import { AudioPlayer } from './components/AudioPlayer';
 import { ProgressBar } from './components/ProgressBar';
+import { Step0Welcome } from './components/Steps/Step0Welcome';
 import { Step1Proposal } from './components/Steps/Step1Proposal';
 import { Step2CalendarTime } from './components/Steps/Step2CalendarTime';
 import { Step3FoodAndActivity } from './components/Steps/Step3FoodAndActivity';
@@ -12,7 +13,7 @@ import { DatePlan, RESTAURANT_OPTIONS, ACTIVITY_OPTIONS, DESSERT_QUICK_OPTIONS }
 import { sendDateNotification } from './services/notificationService';
 
 export function App() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0); // Starts with opening welcome screen
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Tomorrow as default
@@ -49,20 +50,24 @@ export function App() {
 
   return (
     <div className="relative min-h-screen flex flex-col justify-between p-3 sm:p-6 overflow-x-hidden">
-      {/* Background Floating Hearts & Glow Blobs */}
+      {/* Background Floating Petals & Aurora Glow */}
       <FloatingHearts />
 
-      {/* Romantic Auto-playing continuous audio on interaction */}
+      {/* Romantic Auto-playing audio on interaction */}
       <AudioPlayer />
 
-      {/* Stepped Progress Bar */}
+      {/* Stepped Progress Bar (steps 2 to 4) */}
       <header className="pt-2 sm:pt-4 z-10">
         <ProgressBar currentStep={step} />
       </header>
 
-      {/* Main interactive step card */}
+      {/* Main interactive card */}
       <main className="flex-1 flex items-center justify-center z-10 my-3">
         <AnimatePresence mode="wait">
+          {step === 0 && (
+            <Step0Welcome key="step0" onOpen={() => setStep(1)} />
+          )}
+
           {step === 1 && (
             <Step1Proposal key="step1" onAccept={handleStep1Accept} />
           )}
@@ -105,7 +110,7 @@ export function App() {
             <StepSuccess
               key="step5"
               plan={datePlan}
-              onReset={() => setStep(1)}
+              onReset={() => setStep(0)}
             />
           )}
         </AnimatePresence>
